@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by vera on 19-3-19.
  */
-public class ProductorConsumer {
+public class ConditionProductorConsumer {
 
     private static ReentrantLock lock = new ReentrantLock();
     private static Condition full = lock.newCondition();
@@ -47,15 +48,11 @@ public class ProductorConsumer {
                 lock.lock();
                 try {
                     while (list.size() == maxLength) {
-                        System.out.println("生产者" + Thread.currentThread().getName() + "  list以达到最大容量，进行wait");
                         full.await();
-                        System.out.println("生产者" + Thread.currentThread().getName() + "  退出wait");
                     }
-                    Random random = new Random();
-                    int i = random.nextInt();
-                    System.out.println("生产者" + Thread.currentThread().getName() + " 生产数据" + i);
-                    list.add(i);
-                    empty.signalAll();
+                    System.out.println("生产者" + Thread.currentThread().getName());
+                    list.add(1);
+                    empty.signal();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
@@ -80,13 +77,11 @@ public class ProductorConsumer {
                 lock.lock();
                 try {
                     while (list.isEmpty()) {
-                        System.out.println("消费者" + Thread.currentThread().getName() + "  list为空，进行wait");
                         empty.await();
-                        System.out.println("消费者" + Thread.currentThread().getName() + "  退出wait");
                     }
                     Integer element = list.remove(0);
-                    System.out.println("消费者" + Thread.currentThread().getName() + "  消费数据：" + element);
-                    full.signalAll();
+                    System.out.println("消费者" + Thread.currentThread().getName());
+                    full.signal();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
