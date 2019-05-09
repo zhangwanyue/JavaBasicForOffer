@@ -19,13 +19,13 @@ public class Main {
     str[10]: start clock
     str[14]: end clock
     str[18]: Accept
-    str[20]: Concel
+    str[20]: cancel
     */
     static String[] str = new String[21];
     static int minStartClock = 9;
     static int maxEndClock = 22;
     static List<Customer> bookList = new LinkedList<>();
-    static List<Customer> concelList = new ArrayList<>();
+    static List<Customer> cancelList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -59,9 +59,9 @@ public class Main {
         int endClock;
         String place;
         String bookPattern = "(U)(\\d{3})(\\s)(\\d{4})(-)(\\d{2})(-)(\\d{2})(\\s)(\\d{2})(:)(00)(~)(\\d{2})(:)(00)(\\s)([A-D])";
-        String concelPattern = "(U)(\\d{3})(\\s)(\\d{4})(-)(\\d{2})(-)(\\d{2})(\\s)(\\d{2})(:)(00)(~)(\\d{2})(:)(00)(\\s)([A-D])(\\s)([C])";
+        String cancelPattern = "(U)(\\d{3})(\\s)(\\d{4})(-)(\\d{2})(-)(\\d{2})(\\s)(\\d{2})(:)(00)(~)(\\d{2})(:)(00)(\\s)([A-D])(\\s)([C])";
         boolean isBook = Pattern.matches(bookPattern, line);
-        boolean isConcel = Pattern.matches(concelPattern, line);
+        boolean iscancel = Pattern.matches(cancelPattern, line);
         // System.out.println(line);
         if (isBook) {
             // System.out.println(Pattern.matches(bookPattern, line));
@@ -91,8 +91,8 @@ public class Main {
                 Customer cus = new Customer(userID, year, month, day, startClock, endClock, place);
                 book(cus);
             }
-        } else if (isConcel) {
-            Pattern p = Pattern.compile(concelPattern);
+        } else if (iscancel) {
+            Pattern p = Pattern.compile(cancelPattern);
             Matcher m = p.matcher(line);
             // System.out.println(m.groupCount());
             m.find();
@@ -109,7 +109,7 @@ public class Main {
             endClock = Integer.valueOf(str[14]);
             place = str[18];
             Customer cus = new Customer(userID, year, month, day, startClock, endClock, place);
-            concelBook(cus);
+            cancelBook(cus);
         } else {
             printInvalidBookError();
         }
@@ -126,25 +126,25 @@ public class Main {
         printBookSuccess();
     }
 
-    public static void concelBook(Customer cus) {
+    public static void cancelBook(Customer cus) {
         boolean rem = false;
         for (Customer c : bookList) {
             if (cus.isEqual(c)) {
                 bookList.remove(c);
-                concelList.add(cus);
+                cancelList.add(cus);
                 printBookSuccess();
                 rem = true;
             }
         }
         if (!rem)
-            printConcelError();
+            printcancelError();
     }
 
     public static void printResult() {
         String[] placeIncome = new String[4];
         int[] placePrice = new int[4];
         int bookIncome;
-        int concelIncome;
+        int cancelIncome;
         for (int j = 'A', k = 0; j <= 'D'; j++, k++) {
             placeIncome[k] = "场地" + String.valueOf((char) (j)) + ":\n";
         }
@@ -162,15 +162,15 @@ public class Main {
             }
             // System.out.println(bookIncome);
         }
-        for (Customer c : concelList) {
-            concelIncome = calConcel(c);
+        for (Customer c : cancelList) {
+            cancelIncome = calcancel(c);
             for (int j = 'A', k = 0; j <= 'D'; j++, k++) {
                 if ((String.valueOf((char) (j))).equals(c.place)) {
-                    placePrice[k] += concelIncome;
+                    placePrice[k] += cancelIncome;
                     placeIncome[k] += (c.year + "-" + (c.month < 10 ? ("0" + c.month) : c.month) + "-" + (c.day < 10 ? ("0" + c.day) : c.day) + " "
                             + (c.startClock < 10 ? ("0" + c.startClock) : c.startClock) + ":" + "00" + "~"
                             + (c.endClock < 10 ? ("0" + c.endClock) : c.endClock) + ":" + "00"
-                            + " 违约金" + " " + concelIncome + "元\n");
+                            + " 违约金" + " " + cancelIncome + "元\n");
                 }
             }
         }
@@ -185,7 +185,7 @@ public class Main {
         System.out.println("---\n" + "总计：" + sumPrice + "元");
     }
 
-    public static int calConcel(Customer c) {
+    public static int calcancel(Customer c) {
         return (int) (calPrice(c) * (getWeek(c) <= 5 ? 0.5 : 0.25));
     }
 
@@ -274,7 +274,7 @@ public class Main {
         System.out.println("Error: the booking conflicts with existing bookings!");
     }
 
-    public static void printConcelError() {
+    public static void printcancelError() {
         System.out.println("Error: the booking being cancelled does not exist!");
     }
 
