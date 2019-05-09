@@ -150,7 +150,7 @@ public class Main {
         }
         System.out.println("\n" + "收入汇总\n" + "---");
         for (Customer c : bookList) {
-            bookIncome = calPrice(c);
+            bookIncome = callPrice(c);
             for (int j = 'A', k = 0; j <= 'D'; j++, k++) {
                 if ((String.valueOf((char) (j))).equals(c.place)) {
                     placePrice[k] += bookIncome;
@@ -186,7 +186,7 @@ public class Main {
     }
 
     public static int calcancel(Customer c) {
-        return (int) (calPrice(c) * (getWeek(c) <= 5 ? 0.5 : 0.25));
+        return (int) (callPrice(c) * (getWeek(c) <= 5 ? 0.5 : 0.25));
     }
 
     public static int getWeek(Customer c) {
@@ -208,7 +208,7 @@ public class Main {
         return 0;
     }
 
-    public static int calPrice(Customer c) {
+    public static int callPrice(Customer c) {
         int[] workDayPrice = {30, 50, 80, 60};
         int[] weekDayPrice = {40, 50, 60};
         int week = getWeek(c);
