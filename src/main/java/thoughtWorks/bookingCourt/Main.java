@@ -163,7 +163,7 @@ public class Main {
             // System.out.println(bookIncome);
         }
         for (Customer c : cancelList) {
-            cancelIncome = calcancel(c);
+            cancelIncome = callcancel(c);
             for (int j = 'A', k = 0; j <= 'D'; j++, k++) {
                 if ((String.valueOf((char) (j))).equals(c.place)) {
                     placePrice[k] += cancelIncome;
@@ -185,7 +185,7 @@ public class Main {
         System.out.println("---\n" + "总计：" + sumPrice + "元");
     }
 
-    public static int calcancel(Customer c) {
+    public static int callcancel(Customer c) {
         return (int) (callPrice(c) * (getWeek(c) <= 5 ? 0.5 : 0.25));
     }
 
