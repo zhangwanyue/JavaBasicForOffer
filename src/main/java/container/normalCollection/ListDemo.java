@@ -1,12 +1,13 @@
 package container.normalCollection;
 
+// normal collection and synchronized collection
 public class ListDemo {
     // List
     // ArrayList
 
     // LinkedList
 
-    // Vector
+    // Vector(sync)
 
 
     // Set
