@@ -6,7 +6,7 @@ import java.util.concurrent.*;
  * Created by vera on 19-4-21.
  */
 public class BlockingQueueProducerConsumer {
-    public static void main(String[] agrs){
+    public static void main(String[] args){
         BlockingQueue<Integer> blockingQueue = new LinkedBlockingQueue<>(10);
         ExecutorService service = Executors.newFixedThreadPool(15);
         for(int i = 0; i < 5; i++) {

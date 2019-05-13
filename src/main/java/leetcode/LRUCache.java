@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by vera on 19-3-31.
@@ -97,6 +98,7 @@ class DoubleLinkedListNode {
         val = value;
         this.key = key;
     }
+
 }
 
 class LRUTest{
