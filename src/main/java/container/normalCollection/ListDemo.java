@@ -5,6 +5,8 @@ public class ListDemo {
     // 1. List
     // 1.1 ArrayList
 
+
+
     // 1.2 LinkedList
 
     // 1.3 Vector(sync)

@@ -38,6 +38,12 @@ public class CollectionsDemo {
         queue.add("Watermelon");
         queue.forEach(System.out::println);
 
+        // binarySearch
+        Collections.sort(fruits); // must sort first(because binarySearch assumes sorting so that it can find faster)
+        int index = Collections.binarySearch(fruits, "Oranges");
+        System.out.println("-----------binarySearch-----------");
+        fruits.forEach(System.out::println);
+        System.out.println("Apple index: " + index);
 
     }
 }
