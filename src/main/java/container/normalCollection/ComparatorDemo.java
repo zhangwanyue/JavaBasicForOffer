@@ -73,7 +73,7 @@ class Employee implements Comparable<Employee> {
     }
 
     @Override
-    public int compareTo(Employee employee) {
+    public int compareTo(Employee employee) { // 逻辑大概可以理解为: if(return > 0){swap two elements;}
         return (this.id - employee.id);
     }
 }
