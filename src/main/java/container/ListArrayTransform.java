@@ -7,12 +7,12 @@ import java.util.List;
 
 public class ListArrayTransform {
     public static void main(String[] args){
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         Collections.addAll(list, "A", "B", "C");
 //        String[] array = (String[])list.toArray(); //Exception in thread "main" java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
 
         // 使用泛型,无需显式类型转换
-        String[] array = list.toArray(new String[list.size()]);
+        String[] array = list.toArray(new String[list.size()]); // 阿里开发手册强制要求：使用集合转数组的方法，必须使用集合的toArray(T[] array)，传入的使类型完全一样的数组，大小就是list.size();
         System.out.println(Arrays.toString(array));
     }
 }
