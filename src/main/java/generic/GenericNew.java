@@ -1,6 +1,7 @@
 package generic;
 
 // 解决泛型擦除导致无法new T()的问题
+// 泛型代码中不能new T()的原因有两个，一是因为擦除，不能确定类型；二是无法确定T是否包含无参构造函数
 
 interface Factory<T>{
     T create();

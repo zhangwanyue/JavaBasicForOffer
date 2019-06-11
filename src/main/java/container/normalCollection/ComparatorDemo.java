@@ -43,6 +43,7 @@ public class ComparatorDemo {
         Arrays.sort(employees, Employee.salaryAndIdComparator);
         System.out.println("salary and id asec: " + Arrays.toString(employees));
 
+        // list sort using comparator
         List<Employee> employeeList = new ArrayList<>(employees.length);
         Collections.addAll(employeeList, employees);
         Collections.sort(employeeList, Employee.idComparator);
