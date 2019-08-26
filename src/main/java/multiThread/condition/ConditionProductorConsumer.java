@@ -27,7 +27,6 @@ public class ConditionProductorConsumer {
         for (int i = 0; i < 10; i++) {
             service.submit(new Consumer(linkedList));
         }
-
     }
 
     static class Productor implements Runnable {
