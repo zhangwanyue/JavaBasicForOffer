@@ -7,6 +7,9 @@ import java.util.Arrays;
 public class GenericExtend {
     public static void main(String[] args){
         // 数组的协变
+        // 数组的协变性(covariant)是指：
+        // 如果类Base是类Sub的基类，那么Base[]就是Sub[]的基类。
+        // 而泛型是不可变的(invariant)，List<Base>不会是List<Sub>的基类，更不会是它的子类。
         Fruit[] fruits = new Apple[10];
         fruits[0] = new Apple("apple1");
         fruits[1] = new GreenApple("apple2");
