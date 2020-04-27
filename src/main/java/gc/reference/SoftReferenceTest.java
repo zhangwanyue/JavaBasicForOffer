@@ -70,6 +70,13 @@ public class SoftReferenceTest {
         Reference<? extends String> weakReferenceGc = weakReferenceQueue.poll();
         System.out.println(weakReferenceGc); // null
     }
+
+    public static void test3(){
+        String str = new String("abc");
+        WeakReference<String> weakReference = new WeakReference<>(str);
+        // 弱引用转强引用
+        String strongReference = weakReference.get();
+    }
 }
 
 

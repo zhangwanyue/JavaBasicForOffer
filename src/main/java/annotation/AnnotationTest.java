@@ -37,6 +37,7 @@ public class AnnotationTest {
         boolean result = true;
         // 遍历所有属性
         for (Field field : fields) {
+            System.out.println("field: " + field);
             // 如果属性上有此注解，则进行赋值操作
             if (field.isAnnotationPresent(ValidateAge.class)) {
                 ValidateAge validateAge = field.getAnnotation(ValidateAge.class);
